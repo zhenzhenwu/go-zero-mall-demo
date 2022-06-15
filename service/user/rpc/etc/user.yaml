@@ -2,7 +2,7 @@ Name: user.rpc
 ListenOn: 127.0.0.1:9000
 Etcd:
   Hosts:
-  - etcd:2379
+    - etcd:2379
   Key: user.rpc
 
 Mysql:
@@ -14,3 +14,8 @@ CacheRedis:
     Pass:
 
 Salt: HWVOFkGgPTryzICwd7qnJaZR9KQ2i8xe
+
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9090
+  Path: /metrics

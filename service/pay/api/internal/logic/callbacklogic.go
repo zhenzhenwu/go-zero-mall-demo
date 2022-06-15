@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"ang-miracle.com/go-zero-mall-demo/service/pay/rpc/pay"
 	"context"
 
 	"ang-miracle.com/go-zero-mall-demo/service/pay/api/internal/svc"
@@ -24,7 +25,17 @@ func NewCallbackLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Callback
 }
 
 func (l *CallbackLogic) Callback(req *types.CallbackRequest) (resp *types.CallbackResponse, err error) {
-	// todo: add your logic here and delete this line
+	_, err = l.svcCtx.PayRpc.Callback(l.ctx, &pay.CallbackRequest{
+		Id:     req.Id,
+		Uid:    req.Uid,
+		Oid:    req.Oid,
+		Amount: req.Amount,
+		Source: req.Source,
+		Status: req.Status,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.CallbackResponse{}, nil
 }

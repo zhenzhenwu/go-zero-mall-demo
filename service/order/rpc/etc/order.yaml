@@ -17,11 +17,15 @@ UserRpc:
   Etcd:
     Hosts:
       - etcd:2379
-    key: user.rpc
+    Key: user.rpc
 
 ProductRpc:
   Etcd:
     Hosts:
       - etcd:2379
-    key: product.rpc
+    Key: product.rpc
 
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9092
+  Path: /metrics

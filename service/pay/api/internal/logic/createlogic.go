@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"ang-miracle.com/go-zero-mall-demo/service/pay/rpc/pay"
 	"context"
 
 	"ang-miracle.com/go-zero-mall-demo/service/pay/api/internal/svc"
@@ -24,7 +25,13 @@ func NewCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateLogi
 }
 
 func (l *CreateLogic) Create(req *types.CreateRequest) (resp *types.CreateResponse, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	res, err := l.svcCtx.PayRpc.Create(l.ctx, &pay.CreateRequest{
+		Uid:    req.Uid,
+		Oid:    req.Oid,
+		Amount: req.Amount,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &types.CreateResponse{Id: res.Id}, nil
 }
